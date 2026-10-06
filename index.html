@@ -14,694 +14,832 @@
 <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/manrope@5.3.0/files/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 
 <style>
-@font-face{
-  font-family:Manrope;
-  src:url('https://cdn.jsdelivr.net/npm/@fontsource-variable/manrope@5.3.0/files/manrope-latin-wght-normal.woff2') format('woff2');
-  font-weight:200 800;
-  font-display:swap;
+@font-face {
+  font-family: Manrope;
+  src: url("https://cdn.jsdelivr.net/npm/@fontsource-variable/manrope@5.3.0/files/manrope-latin-wght-normal.woff2") format("woff2");
+  font-weight: 200 800;
+  font-display: swap;
 }
 
-@font-face{
-  font-family:Instrument;
-  src:url('https://cdn.jsdelivr.net/npm/@fontsource/instrument-serif@5.3.0/files/instrument-serif-latin-400-italic.woff2') format('woff2');
-  font-style:italic;
-  font-display:swap;
+@font-face {
+  font-family: Instrument;
+  src: url("https://cdn.jsdelivr.net/npm/@fontsource/instrument-serif@5.3.0/files/instrument-serif-latin-400-italic.woff2") format("woff2");
+  font-style: italic;
+  font-display: swap;
 }
 
-:root{
-  --paper:#e7e7de;
-  --ink:#1b2b23;
-  --copper:#dbad86;
-  --scene:0;
-  --drift:0px;
+:root {
+  --paper: #e7e7de;
+  --ink: #1b2b23;
+  --tone: #536a43;
+  --drift: 0px;
+  --ambient-x: 65%;
+  --ambient-y: 45%;
 }
 
-*{box-sizing:border-box}
-
-html{
-  background:var(--paper);
-  color:var(--ink);
-  scrollbar-color:#687464 var(--paper);
+* {
+  box-sizing: border-box;
 }
 
-body{
-  margin:0;
-  font-family:Manrope,Arial,sans-serif;
-  -webkit-font-smoothing:antialiased;
+html {
+  background: var(--paper);
+  color: var(--ink);
+  scrollbar-color: #687464 var(--paper);
 }
 
-button,a{
-  -webkit-tap-highlight-color:transparent;
-  -webkit-user-drag:none;
+body {
+  margin: 0;
+  font-family: Manrope, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-a{
-  color:inherit;
-  text-decoration:none;
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-button{font:inherit}
+button {
+  font: inherit;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-drag: none;
+}
 
 button:focus-visible,
-a:focus-visible{
-  outline:2px solid currentColor;
-  outline-offset:5px;
+a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
 }
 
-h1,h2,p{margin:0}
-
-::selection{
-  background:var(--ink);
-  color:var(--paper);
+::selection {
+  background: var(--ink);
+  color: var(--paper);
 }
 
-[hidden]{display:none!important}
-
-.sr-only{
-  position:absolute;
-  width:1px;
-  height:1px;
-  margin:-1px;
-  padding:0;
-  overflow:hidden;
-  clip:rect(0,0,0,0);
-  white-space:nowrap;
-  border:0;
+[hidden] {
+  display: none !important;
 }
 
-.world{position:relative}
-
-.pin{
-  position:relative;
-  overflow:hidden;
-  background:var(--paper);
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.stage{
-  position:relative;
-  max-width:1100px;
-  min-height:100svh;
-  margin:auto;
-  padding:70px 56px;
-  display:grid;
-  grid-template-columns:minmax(0,280px) minmax(0,460px);
-  justify-content:space-between;
-  gap:100px;
-  align-items:center;
+.world {
+  position: relative;
 }
 
-.bio{
-  position:relative;
-  min-width:0;
-  width:100%;
-  align-self:center;
+.pin {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--paper);
 }
 
-.portrait-shell{
-  position:relative;
-  width:100%;
-  max-width:280px;
-  isolation:isolate;
+.pin::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at var(--ambient-x) var(--ambient-y),
+    var(--tone),
+    transparent 63%
+  );
+  opacity: .13;
+  transition: background 1s, opacity 1s;
 }
 
-.portrait{
-  position:relative;
-  aspect-ratio:7/8;
-  overflow:hidden;
-  background:#273c2d;
-  border-radius:3px 3px 20px 3px;
+.stage {
+  position: relative;
+  max-width: 1100px;
+  min-height: 100svh;
+  margin: auto;
+  padding: 70px 56px;
+  display: grid;
+  grid-template-columns: minmax(0, 280px) minmax(0, 460px);
+  justify-content: space-between;
+  gap: 100px;
+  align-items: center;
 }
 
-.portrait:after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(180deg,transparent 55%,#13221840);
-  pointer-events:none;
+.bio {
+  position: relative;
+  min-width: 0;
+  width: 100%;
+  align-self: center;
 }
 
-.portrait img{
-  position:absolute;
-  inset:-4% 0;
-  width:100%;
-  height:108%;
-  object-fit:cover;
-  object-position:center 30%;
-  filter:saturate(.7);
-  transform:translateY(var(--drift)) scale(1.025);
+.portrait-shell {
+  position: relative;
+  width: 100%;
+  max-width: 280px;
+  perspective: 900px;
 }
 
-.portrait-fallback{
-  position:absolute;
-  inset:0;
-  display:grid;
-  place-items:center;
-  font:italic 135px/.8 Instrument,Georgia,serif;
-  letter-spacing:-.12em;
-  color:#a4b89742;
-  translate:-7px var(--drift);
+.portrait {
+  position: relative;
+  aspect-ratio: 7 / 8;
+  overflow: hidden;
+  background: #273c2d;
+  border-radius: 3px 3px 20px 3px;
+  transform:
+    rotateY(var(--photo-y, 0deg))
+    rotateX(var(--photo-x, 0deg));
+  transition:
+    transform .65s cubic-bezier(.22, 1, .36, 1),
+    box-shadow .7s;
+  box-shadow: 0 18px 42px -25px #10251665;
 }
 
-.portrait-glint{
-  position:absolute;
-  inset:-20%;
-  pointer-events:none;
-  z-index:2;
-  opacity:.2;
-  background:linear-gradient(115deg,transparent 35%,#eef1d722 49%,transparent 62%);
-  transform:translateX(calc(var(--scene)*25% - 25%));
+.portrait::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 55%,
+    #13221840
+  );
+  pointer-events: none;
 }
 
-.signature{
-  position:relative;
-  margin-top:23px;
-  min-width:0;
+.portrait img {
+  position: absolute;
+  inset: -5% 0;
+  width: 100%;
+  height: 110%;
+  object-fit: cover;
+  object-position: center 30%;
+  filter: saturate(.7);
+  transform:
+    translate3d(var(--photo-pan, 0px), var(--drift), 0)
+    scale(1.035);
+  transition: transform .75s cubic-bezier(.22, 1, .36, 1);
 }
 
-.signature h1{
-  display:flex;
-  gap:9px;
-  align-items:baseline;
-  flex-wrap:wrap;
-  font-size:2.75rem;
-  font-weight:450;
-  line-height:1.05;
-  letter-spacing:-.065em;
-  color:var(--ink);
+.portrait-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font: italic 135px/.8 Instrument, Georgia, serif;
+  letter-spacing: -.12em;
+  color: #a4b89765;
+  translate: -7px var(--drift);
 }
 
-.signature h1 em{
-  font:italic 1.09em/1 Instrument,Georgia,serif;
-  letter-spacing:-.035em;
+.portrait-glint {
+  position: absolute;
+  inset: -40%;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(
+    115deg,
+    transparent 40%,
+    #eef1d727 50%,
+    transparent 60%
+  );
+  transform: translateX(var(--glint, -45%));
+  transition: transform 1.2s cubic-bezier(.22, 1, .36, 1);
 }
 
-.signature p{
-  font-size:.875rem;
-  line-height:1.5;
-  margin-top:11px;
-  max-width:250px;
-  color:#52604f;
+.signature {
+  position: relative;
+  margin-top: 23px;
+  min-width: 0;
 }
 
-.product-panel{
-  min-width:0;
-  width:100%;
-  position:relative;
-  isolation:isolate;
+.signature h1 {
+  display: flex;
+  gap: 9px;
+  align-items: baseline;
+  flex-wrap: wrap;
+  font-size: 2.75rem;
+  font-weight: 450;
+  line-height: 1.05;
+  letter-spacing: -.065em;
 }
 
-.deck{
-  position:relative;
-  display:grid;
-  gap:20px;
-  min-width:0;
-  perspective:1800px;
-  perspective-origin:50% 50%;
+.signature h1 em {
+  font: italic 1.09em/1 Instrument, Georgia, serif;
+  letter-spacing: -.035em;
 }
 
-.card{
-  --card-ink:#e8eddf;
-  --card-muted:#c3cfbd;
-  --card-accent:#c8d4a0;
-  position:relative;
-  display:grid;
-  grid-template-columns:minmax(0,1fr) 58px;
-  grid-template-rows:auto 1fr auto;
-  gap:14px 22px;
-  min-height:260px;
-  isolation:isolate;
-  padding:30px;
-  color:var(--card-ink);
-  background:#22392c;
-  border:1px solid #b7c2a63b;
-  border-radius:4px 4px 16px 4px;
-  box-shadow:0 14px 30px #2436270d;
-  backface-visibility:hidden;
-  transform-origin:50% 100%;
-  touch-action:pan-y;
+.signature p {
+  font-size: .875rem;
+  line-height: 1.5;
+  margin-top: 11px;
+  max-width: 250px;
+  color: #52604f;
 }
 
-.card:before{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:-1;
-  border-radius:inherit;
-  pointer-events:none;
-  background:linear-gradient(120deg,#ffffff03,transparent 40%,#0a181010);
+.product-panel {
+  min-width: 0;
+  width: 100%;
+  position: relative;
+  perspective: 1400px;
+  isolation: isolate;
 }
 
-.card-body{display:contents}
-
-.card h2{
-  grid-column:1;
-  grid-row:1;
-  align-self:center;
-  font-size:1.75rem;
-  font-weight:500;
-  letter-spacing:-.055em;
-  line-height:1.15;
+.deck {
+  position: relative;
+  min-width: 0;
+  transform:
+    translate3d(var(--drag-x, 0px), var(--float-y, 0px), 0)
+    rotateX(var(--tilt-x, 0deg))
+    rotateY(var(--tilt-y, 0deg));
+  transition: transform .65s cubic-bezier(.22, 1, .36, 1);
+  touch-action: pan-y;
 }
 
-.card p{
-  grid-column:1/-1;
-  grid-row:2;
-  align-self:start;
-  font-size:1rem;
-  line-height:1.5;
-  letter-spacing:-.015em;
-  color:var(--card-muted);
-  margin:0;
-  max-width:34ch;
+.deck.dragging {
+  transition: transform .08s linear;
+  cursor: grabbing;
 }
 
-.art{
-  position:relative;
-  grid-column:2;
-  grid-row:1;
-  align-self:start;
-  width:58px;
-  height:58px;
-  display:flex;
-  align-items:flex-start;
-  justify-content:center;
-  isolation:isolate;
-  user-select:none;
-  color:var(--card-accent);
+.card {
+  --card-ink: #e8eddf;
+  --card-muted: #c3cfbd;
+  --card-accent: #c8d4a0;
+  --line: #b7c2a63b;
+
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 58px;
+  grid-template-rows: auto 1fr auto;
+  gap: 18px 22px;
+  min-height: 304px;
+  isolation: isolate;
+  padding: 32px;
+  color: var(--card-ink);
+  background: #22392c;
+  border: 1px solid var(--line);
+  border-radius: 5px 5px 20px 5px;
+  box-shadow: 0 28px 45px -30px #14271966;
+  backface-visibility: hidden;
+  overflow: hidden;
+  cursor: grab;
 }
 
-.enhanced .card{cursor:grab}
-.dragging .card{cursor:grabbing}
-
-.open-product{
-  grid-column:1/-1;
-  grid-row:3;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:16px;
-  padding-top:17px;
-  border-top:1px solid #b7c2a63b;
-  font-size:.875rem;
-  font-weight:550;
-  line-height:1.4;
-  min-height:44px;
-  cursor:pointer;
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    380px circle at var(--light-x, 75%) var(--light-y, 20%),
+    #ffffff16,
+    transparent 70%
+  );
+  opacity: var(--light-on, .45);
+  transition: opacity .5s;
 }
 
-.open-product:after{
-  content:"";
-  display:block;
-  width:21px;
-  height:21px;
-  flex:none;
-  border-radius:50%;
-  border:1px solid currentColor;
-  background:radial-gradient(circle,currentColor 0 2px,transparent 3px);
-  transition:transform .3s;
-  opacity:.7;
+.card::after {
+  content: "";
+  position: absolute;
+  inset: -80% -45%;
+  pointer-events: none;
+  background: linear-gradient(
+    110deg,
+    transparent 44%,
+    #ffffff17 50%,
+    transparent 56%
+  );
+  transform: translateX(var(--shine, -75%));
+  transition: transform 1.2s cubic-bezier(.22, 1, .36, 1);
 }
 
-.open-product:hover:after,
-.open-product:focus-visible:after{
-  transform:scale(1.15);
-  opacity:1;
+.card-body {
+  display: contents;
 }
 
-.open-product span{transition:translate .3s}
-.open-product:hover span{translate:3px 0}
-
-.plan{
-  --card-ink:#283b28;
-  --card-muted:#53604b;
-  --card-accent:#415936;
-  background:#efeee5;
-  border-color:#c6ceba;
+.card h2 {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+  font-size: 1.75rem;
+  font-weight: 500;
+  letter-spacing: -.055em;
+  line-height: 1.15;
 }
 
-.plan .open-product{border-color:#c6ceba}
-
-.rota{
-  --card-ink:#f0eade;
-  --card-muted:#c6c6b5;
-  --card-accent:#dbad86;
-  background:#17211e;
-  border-color:#536557;
+.card p {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  align-self: start;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: -.015em;
+  color: var(--card-muted);
+  max-width: 34ch;
 }
 
-.lens{
-  position:relative;
-  margin-top:4px;
-  width:40px;
-  height:40px;
-  transform-style:preserve-3d;
+.art {
+  position: relative;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  isolation: isolate;
+  user-select: none;
+  color: var(--card-accent);
+}
+
+.open-product {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 48px;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--line);
+  font-size: .875rem;
+  font-weight: 550;
+  line-height: 1.4;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.open-product::after {
+  content: "";
+  display: block;
+  width: 21px;
+  height: 21px;
+  flex: none;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  background: radial-gradient(
+    circle,
+    currentColor 0 2px,
+    transparent 3px
+  );
+  transition: transform .4s, background .4s;
+  opacity: .7;
+}
+
+.open-product:hover::after,
+.open-product:focus-visible::after {
+  transform: scale(1.2);
+  opacity: 1;
+  background: radial-gradient(
+    circle,
+    currentColor 0 4px,
+    transparent 5px
+  );
+}
+
+.open-product span {
+  display: block;
+  transition: transform .4s cubic-bezier(.22, 1, .36, 1);
+}
+
+.open-product:hover span {
+  transform: translateX(4px);
+}
+
+.plan {
+  --card-ink: #283b28;
+  --card-muted: #53604b;
+  --card-accent: #415936;
+  --line: #c6ceba;
+  background: #efeee5;
+}
+
+.rota {
+  --card-ink: #f0eade;
+  --card-muted: #c6c6b5;
+  --card-accent: #dbad86;
+  --line: #536557;
+  background: #17211e;
+}
+
+.lens {
+  position: relative;
+  margin-top: 4px;
+  width: 40px;
+  height: 40px;
+  transform-style: preserve-3d;
   transform:
     perspective(700px)
-    rotateX(var(--lens-x,10deg))
-    rotateY(var(--lens-y,-12deg))
-    rotateZ(var(--lens-z,-12deg));
-  transition:transform .25s ease-out;
+    rotateX(var(--lens-x, 10deg))
+    rotateY(var(--lens-y, -12deg))
+    rotateZ(var(--lens-z, -12deg));
+  transition: transform .6s cubic-bezier(.22, 1, .36, 1);
 }
 
-.lens-ring{
-  position:absolute;
-  inset:0;
-  border:1px solid currentColor;
-  border-radius:50%;
+.lens-ring {
+  position: absolute;
+  inset: 0;
+  border: 1px solid currentColor;
+  border-radius: 50%;
 }
 
-.lens-ring:nth-child(1){
-  opacity:.2;
-  transform:translateZ(-3px);
+.lens-ring:nth-child(1) {
+  opacity: .2;
+  transform: translateZ(-3px);
 }
 
-.lens-ring:nth-child(2){
-  inset:4px;
-  opacity:.35;
+.lens-ring:nth-child(2) {
+  inset: 4px;
+  opacity: .35;
 }
 
-.lens-ring:nth-child(3){
-  inset:9px;
-  transform:translateZ(4px);
-  opacity:.75;
+.lens-ring:nth-child(3) {
+  inset: 9px;
+  transform: translateZ(4px);
+  opacity: .75;
 }
 
-.lens-ring:nth-child(4){
-  inset:14px;
-  transform:translateZ(8px);
+.lens-ring:nth-child(4) {
+  inset: 14px;
+  transform: translateZ(8px);
 }
 
-.lens-center{
-  position:absolute;
-  inset:18px;
-  border-radius:50%;
-  background:currentColor;
-  transform:translateZ(12px);
+.lens-center {
+  position: absolute;
+  inset: 18px;
+  border-radius: 50%;
+  background: currentColor;
+  transform: translateZ(12px);
 }
 
-.lens-cross{
-  position:absolute;
-  inset:0;
-  transform:translateZ(4px);
-  opacity:.35;
+.lens-cross {
+  position: absolute;
+  inset: 0;
+  transform: translateZ(4px);
+  opacity: .35;
 }
 
-.lens-cross:before,
-.lens-cross:after{
-  content:"";
-  position:absolute;
-  background:currentColor;
+.lens-cross::before,
+.lens-cross::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
 }
 
-.lens-cross:before{
-  height:1px;
-  width:calc(100% + 10px);
-  left:-5px;
-  top:50%;
+.lens-cross::before {
+  height: 1px;
+  width: calc(100% + 10px);
+  left: -5px;
+  top: 50%;
 }
 
-.lens-cross:after{
-  width:1px;
-  height:calc(100% + 10px);
-  top:-5px;
-  left:50%;
+.lens-cross::after {
+  width: 1px;
+  height: calc(100% + 10px);
+  top: -5px;
+  left: 50%;
 }
 
-.numeral{
-  font-size:3rem;
-  font-weight:400;
-  line-height:1;
-  letter-spacing:-.085em;
-  font-variant-numeric:tabular-nums;
+.numeral {
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.085em;
+  font-variant-numeric: tabular-nums;
 }
 
-.numeral small{
-  display:block;
-  font-size:.75rem;
-  letter-spacing:.02em;
-  line-height:1.3;
-  text-align:right;
-  margin-top:5px;
-  font-weight:500;
+.numeral small {
+  display: block;
+  font-size: .75rem;
+  letter-spacing: .02em;
+  line-height: 1.3;
+  text-align: right;
+  margin-top: 5px;
+  font-weight: 500;
 }
 
-.product-nav{
-  display:flex;
-  gap:5px;
-  align-items:center;
-  margin-top:30px;
-  position:relative;
-  z-index:20;
+.product-nav {
+  display: flex;
+  gap: 4px;
+  align-items: stretch;
+  margin-top: 30px;
+  position: relative;
+  padding: 4px;
+  border-radius: 7px;
+  background: #1b2b2307;
+  isolation: isolate;
 }
 
-.product-nav button{
-  flex:1;
-  min-height:44px;
-  border:0;
-  border-radius:3px;
-  padding:10px 5px;
-  background:transparent;
-  color:#596354;
-  cursor:pointer;
-  font-size:.8125rem;
-  font-weight:550;
-  white-space:nowrap;
-  transition:background .3s,color .3s;
+.nav-selection {
+  position: absolute;
+  z-index: -1;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  border-radius: 4px;
+  background: #1b2b23;
+  transition:
+    transform .55s cubic-bezier(.22, 1, .36, 1),
+    width .55s cubic-bezier(.22, 1, .36, 1);
+  pointer-events: none;
 }
 
-.product-nav button[aria-current="true"]{
-  background:#1b2b23;
-  color:#e7e7de;
+.product-nav button {
+  flex: 1;
+  min-width: 0;
+  min-height: 46px;
+  border: 0;
+  border-radius: 4px;
+  padding: 10px 6px;
+  background: transparent;
+  color: #52604f;
+  cursor: pointer;
+  font-size: .875rem;
+  font-weight: 550;
+  white-space: nowrap;
+  transition: color .35s;
 }
 
-.product-nav button:not([aria-current="true"]):hover{
-  background:#1b2b2310;
-  color:#1b2b23;
+.product-nav button[aria-selected="true"] {
+  color: #e7e7de;
 }
 
-.scroll-cue{
-  position:absolute;
-  left:56px;
-  bottom:26px;
-  width:19px;
-  height:29px;
-  border:1px solid #46593d55;
-  border-radius:15px;
-  display:none;
-  opacity:calc(1 - var(--cue-away,0));
-  pointer-events:none;
+.product-nav button:not([aria-selected="true"]):hover {
+  color: #15251b;
 }
 
-.scroll-cue:after{
-  content:"";
-  position:absolute;
-  top:6px;
-  left:8px;
-  width:1px;
-  height:6px;
-  background:#283b28;
-  animation:scroll-cue 2.2s ease-in-out infinite;
+.scroll-cue {
+  position: absolute;
+  left: 56px;
+  bottom: 26px;
+  width: 19px;
+  height: 29px;
+  border: 1px solid #46593d55;
+  border-radius: 15px;
+  display: none;
+  opacity: calc(1 - var(--scroll, 0) * 3);
+  pointer-events: none;
 }
 
-@keyframes scroll-cue{
-  0%,100%{
-    transform:translateY(0);
-    opacity:.4;
-  }
-  50%{
-    transform:translateY(7px);
-    opacity:1;
-  }
+.scroll-cue::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  width: 1px;
+  height: 6px;
+  background: #283b28;
+  animation: scroll-cue 2.2s ease-in-out infinite;
 }
 
-.enhanced .world{height:260svh}
-
-.enhanced .pin{
-  position:sticky;
-  top:0;
-  height:100svh;
-}
-
-.enhanced .stage{
-  height:100svh;
-  min-height:0;
-}
-
-.enhanced .deck{
-  height:290px;
-  display:block;
-}
-
-.enhanced .card{
-  position:absolute;
-  inset:0;
-  min-height:0;
-  will-change:transform;
-  transform-style:preserve-3d;
-}
-
-.enhanced .scroll-cue{display:block}
-
-@media(min-width:801px) and (max-width:1000px){
-  .stage{
-    padding:60px 40px;
-    gap:65px;
-    grid-template-columns:minmax(0,.68fr) minmax(0,1fr);
+@keyframes scroll-cue {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: .4;
   }
 
-  .signature h1{font-size:2.4rem}
-
-  .card{
-    padding:25px;
-    column-gap:16px;
+  50% {
+    transform: translateY(7px);
+    opacity: 1;
   }
-
-  .card h2{font-size:1.6rem}
-  .card p{font-size:.9375rem}
-  .enhanced .deck{height:290px}
 }
 
-@media(max-width:800px){
-  .stage{
-    max-width:560px;
-    grid-template-columns:1fr;
-    padding:36px 26px;
-    gap:42px;
-    align-content:center;
-  }
-
-  .bio{
-    display:grid;
-    grid-template-columns:100px minmax(0,1fr);
-    gap:21px;
-    align-items:center;
-  }
-
-  .portrait-shell{
-    max-width:100%;
-    margin:0;
-  }
-
-  .portrait{
-    aspect-ratio:5/6;
-    border-radius:3px 3px 12px 3px;
-  }
-
-  .portrait-fallback{
-    font-size:70px;
-    translate:-3px var(--drift);
-  }
-
-  .signature{margin:0}
-
-  .signature h1{
-    display:block;
-    font-size:2.1rem;
-    line-height:1.06;
-    letter-spacing:-.065em;
-  }
-
-  .signature h1 em{
-    display:block;
-    margin-top:3px;
-    font-size:1.15em;
-  }
-
-  .signature p{
-    font-size:.8125rem;
-    line-height:1.45;
-    margin-top:10px;
-    max-width:215px;
-  }
-
-  .card{
-    padding:26px;
-    grid-template-columns:minmax(0,1fr) 48px;
-    column-gap:19px;
-    min-height:250px;
-  }
-
-  .art{
-    width:48px;
-    height:54px;
-  }
-
-  .numeral{font-size:2.65rem}
-  .card h2{font-size:1.6rem}
-
-  .card p{
-    font-size:.9375rem;
-    line-height:1.48;
-  }
-
-  .product-nav{
-    margin-top:25px;
-    gap:2px;
-  }
-
-  .product-nav button{
-    font-size:.75rem;
-    padding:10px 4px;
-  }
-
-  .enhanced .stage{
-    display:grid;
-    grid-template-rows:auto auto;
-    row-gap:42px;
-    align-content:center;
-    padding-block:32px;
-  }
-
-  .enhanced .deck{height:280px}
-  .enhanced .scroll-cue{display:none}
+.scroll-story .world {
+  height: 220svh;
 }
 
-@media(max-width:360px){
-  .stage{padding-inline:20px}
-
-  .bio{
-    grid-template-columns:82px minmax(0,1fr);
-    gap:17px;
-  }
-
-  .signature h1{font-size:1.85rem}
-  .signature p{font-size:.75rem}
-
-  .card{
-    padding:22px;
-    column-gap:13px;
-    grid-template-columns:minmax(0,1fr) 42px;
-  }
-
-  .card h2{font-size:1.45rem}
-  .card p{font-size:.875rem}
-  .art{width:42px}
-  .numeral{font-size:2.45rem}
-
-  .lens{
-    width:36px;
-    height:36px;
-  }
-
-  .lens-center{inset:16px}
-  .lens-ring:nth-child(4){inset:12px}
-  .enhanced .deck{height:275px}
-  .open-product{font-size:.8125rem}
-  .product-nav button{font-size:.7rem}
-  .enhanced .stage{row-gap:34px}
+.scroll-story .pin {
+  position: sticky;
+  top: 0;
+  height: 100svh;
 }
 
-@media(prefers-reduced-motion:reduce){
-  *,*:before,*:after{
-    animation:none!important;
-    transition:none!important;
+.scroll-story .stage {
+  height: 100svh;
+  min-height: 0;
+}
+
+.scroll-story .scroll-cue {
+  display: block;
+}
+
+.no-script {
+  font-size: 1rem;
+  margin: 20px 0;
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+
+.no-script a {
+  text-decoration: underline;
+}
+
+@media (min-width: 801px) and (max-width: 1000px) {
+  .stage {
+    padding: 60px 40px;
+    gap: 65px;
+    grid-template-columns: minmax(0, .68fr) minmax(0, 1fr);
   }
 
+  .signature h1 {
+    font-size: 2.4rem;
+  }
+
+  .card {
+    padding: 27px;
+    column-gap: 16px;
+  }
+
+  .card h2 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .stage {
+    max-width: 560px;
+    grid-template-columns: 1fr;
+    padding: 38px 26px;
+    gap: 44px;
+    align-content: center;
+  }
+
+  .bio {
+    display: grid;
+    grid-template-columns: 100px minmax(0, 1fr);
+    gap: 21px;
+    align-items: center;
+  }
+
+  .portrait-shell {
+    max-width: 100%;
+  }
+
+  .portrait {
+    aspect-ratio: 5 / 6;
+    border-radius: 3px 3px 12px 3px;
+  }
+
+  .portrait-fallback {
+    font-size: 70px;
+    translate: -3px var(--drift);
+  }
+
+  .signature {
+    margin: 0;
+  }
+
+  .signature h1 {
+    display: block;
+    font-size: 2.1rem;
+    line-height: 1.06;
+  }
+
+  .signature h1 em {
+    display: block;
+    margin-top: 3px;
+    font-size: 1.15em;
+  }
+
+  .signature p {
+    font-size: .875rem;
+    line-height: 1.45;
+    margin-top: 10px;
+    max-width: 215px;
+  }
+
+  .card {
+    padding: 26px;
+    grid-template-columns: minmax(0, 1fr) 48px;
+    column-gap: 19px;
+    min-height: 300px;
+  }
+
+  .art {
+    width: 48px;
+    height: 54px;
+  }
+
+  .numeral {
+    font-size: 2.65rem;
+  }
+
+  .card h2 {
+    font-size: 1.6rem;
+  }
+
+  .product-nav {
+    margin-top: 25px;
+    gap: 2px;
+  }
+
+  .product-nav button {
+    font-size: .8125rem;
+    padding: 10px 3px;
+  }
+
+  .scroll-story .scroll-cue {
+    display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .stage {
+    padding-inline: 20px;
+    gap: 36px;
+  }
+
+  .bio {
+    grid-template-columns: 82px minmax(0, 1fr);
+    gap: 17px;
+  }
+
+  .signature h1 {
+    font-size: 1.85rem;
+  }
+
+  .signature p {
+    font-size: .8125rem;
+  }
+
+  .card {
+    padding: 23px;
+    column-gap: 13px;
+    grid-template-columns: minmax(0, 1fr) 42px;
+  }
+
+  .card h2 {
+    font-size: 1.45rem;
+  }
+
+  .art {
+    width: 42px;
+  }
+
+  .numeral {
+    font-size: 2.45rem;
+  }
+
+  .lens {
+    width: 36px;
+    height: 36px;
+  }
+
+  .lens-center {
+    inset: 16px;
+  }
+
+  .lens-ring:nth-child(4) {
+    inset: 12px;
+  }
+
+  .product-nav button {
+    font-size: .75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .deck,
+  .portrait,
   .portrait img,
-  .lens{transform:none!important}
+  .lens {
+    transform: none !important;
+  }
 
-  .portrait-fallback{translate:none!important}
-  .portrait-glint{display:none}
+  .portrait-fallback {
+    translate: none !important;
+  }
+
+  .portrait-glint {
+    display: none;
+  }
 }
 </style>
 </head>
@@ -740,10 +878,10 @@ h1,h2,p{margin:0}
         <div class="deck" aria-label="Produtos de Ian Henrique">
 
           <article
-            data-grab
             class="card diagnosis"
             id="diagnostico"
-            aria-labelledby="diagnosis-title"
+            role="tabpanel"
+            aria-labelledby="tab-diagnostico"
           >
             <div class="art diagnosis-art" aria-label="Lente do Diagnóstico">
               <div class="lens" aria-hidden="true">
@@ -770,15 +908,15 @@ h1,h2,p{margin:0}
           </article>
 
           <article
-            data-grab
             class="card plan"
             id="plano"
-            aria-labelledby="plan-title"
+            role="tabpanel"
+            aria-labelledby="tab-plano"
+            hidden
+            inert
           >
             <div class="art plan-art" aria-label="Trinta dias do plano">
-              <span class="numeral" aria-hidden="true">
-                30<small>dias</small>
-              </span>
+              <span class="numeral" aria-hidden="true">30<small>dias</small></span>
             </div>
 
             <div class="card-body">
@@ -795,10 +933,12 @@ h1,h2,p{margin:0}
           </article>
 
           <article
-            data-grab
             class="card rota"
             id="rota"
-            aria-labelledby="rota-title"
+            role="tabpanel"
+            aria-labelledby="tab-rota"
+            hidden
+            inert
           >
             <div class="art route-art" aria-label="Trajetória da Rota 90">
               <span class="numeral" aria-hidden="true">90</span>
@@ -819,23 +959,53 @@ h1,h2,p{margin:0}
 
         </div>
 
-        <nav class="product-nav" aria-label="Explorar produtos" hidden>
+        <nav
+          class="product-nav"
+          role="tablist"
+          aria-label="Explorar produtos"
+          hidden
+        >
+          <span class="nav-selection" aria-hidden="true"></span>
+
           <button
             type="button"
+            role="tab"
+            id="tab-diagnostico"
             aria-controls="diagnostico"
-            aria-current="true"
+            aria-selected="true"
           >
             Diagnóstico
           </button>
 
-          <button type="button" aria-controls="plano">
+          <button
+            type="button"
+            role="tab"
+            id="tab-plano"
+            aria-controls="plano"
+            aria-selected="false"
+            tabindex="-1"
+          >
             Plano 30 Dias
           </button>
 
-          <button type="button" aria-controls="rota">
+          <button
+            type="button"
+            role="tab"
+            id="tab-rota"
+            aria-controls="rota"
+            aria-selected="false"
+            tabindex="-1"
+          >
             Rota 90
           </button>
         </nav>
+
+        <noscript>
+          <div class="no-script">
+            <a href="https://ianhenrique-o.github.io/newp30d/">Plano 30 Dias</a>
+            <a href="https://ianhenrique-o.github.io/Rota90/">Rota 90</a>
+          </div>
+        </noscript>
       </section>
 
       <span class="scroll-cue" aria-hidden="true"></span>
@@ -847,340 +1017,497 @@ h1,h2,p{margin:0}
 <script>
 (() => {
   const root = document.documentElement;
-  const world = document.querySelector('.world');
-  const deck = document.querySelector('.deck');
-  const cards = [...document.querySelectorAll('.card')];
-  const nav = document.querySelector('.product-nav');
-  const buttons = [...nav.querySelectorAll('button')];
-  const portrait = document.querySelector('.portrait-shell');
-  const lens = document.querySelector('.lens');
+  const world = document.querySelector(".world");
+  const stage = document.querySelector(".stage");
+  const bio = document.querySelector(".bio");
+  const panel = document.querySelector(".product-panel");
+  const deck = document.querySelector(".deck");
+  const cards = [...document.querySelectorAll(".card")];
+  const nav = document.querySelector(".product-nav");
+  const buttons = [...nav.querySelectorAll("button")];
+  const selector = document.querySelector(".nav-selection");
+  const portrait = document.querySelector(".portrait");
+  const lens = document.querySelector(".lens");
 
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
-  const shortScreen = matchMedia('(max-height: 580px)');
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+  const fine = matchMedia("(hover: hover) and (pointer: fine)");
 
   const clamp = (n, lo, hi) => Math.min(hi, Math.max(lo, n));
-  const ease = t => t * t * (3 - 2 * t);
-  const stops = [0, .48, 1];
+  const tones = ["#536a43", "#b19a68", "#775841"];
+  const running = new Set();
 
-  let enabled = false;
+  let active = 0;
+  let requested = 0;
+  let changing = false;
+  let scrollMode = false;
   let frame = 0;
-  let scene = 0;
-  let active = -1;
+  let scrollAnchor = 0;
   let drag = null;
-  let metrics = { top: 0, range: 1 };
+  let range = 1;
+  let top = 0;
 
-  function setActive(index) {
-    if (active === index) return;
+  function motion(element, frames, options) {
+    if (reduce.matches || !element.animate) {
+      return Promise.resolve();
+    }
+
+    const animation = element.animate(frames, options);
+    running.add(animation);
+
+    return animation.finished
+      .catch(() => {})
+      .finally(() => {
+        running.delete(animation);
+        animation.cancel();
+      });
+  }
+
+  function markTab(index) {
+    buttons.forEach((button, i) => {
+      button.setAttribute("aria-selected", String(i === index));
+      button.tabIndex = i === index ? 0 : -1;
+    });
+
+    const button = buttons[index];
+
+    selector.style.width = button.offsetWidth + "px";
+    selector.style.transform =
+      `translateX(${button.offsetLeft - 4}px)`;
+  }
+
+  function showOnly(index) {
+    cards.forEach((card, i) => {
+      card.hidden = i !== index;
+      card.inert = i !== index;
+    });
 
     active = index;
 
-    cards.forEach((card, i) => {
-      const offstage = enabled && i !== active;
+    root.style.setProperty("--tone", tones[index]);
 
-      card.inert = offstage;
-
-      if (offstage) {
-        card.setAttribute('aria-hidden', 'true');
-      } else {
-        card.removeAttribute('aria-hidden');
-      }
-
-      card.classList.toggle('is-current', i === active);
-    });
-
-    buttons.forEach((button, i) => {
-      if (i === active) {
-        button.setAttribute('aria-current', 'true');
-      } else {
-        button.removeAttribute('aria-current');
-      }
-    });
-  }
-
-  function timeline(progress) {
-    if (progress < .16) return 0;
-    if (progress < .36) return ease((progress - .16) / .2);
-    if (progress < .62) return 1;
-    if (progress < .82) return 1 + ease((progress - .62) / .2);
-
-    return 2;
-  }
-
-  function progressForScene(value) {
-    const s = clamp(value, 0, 2);
-
-    if (s === 0) return .16;
-    if (s === 2) return .82;
-
-    const fraction = s <= 1 ? s : s - 1;
-
-    let lo = 0;
-    let hi = 1;
-
-    for (let i = 0; i < 16; i++) {
-      const mid = (lo + hi) / 2;
-
-      if (ease(mid) < fraction) {
-        lo = mid;
-      } else {
-        hi = mid;
-      }
-    }
-
-    return (s <= 1 ? .16 : .62) + (lo + hi) / 2 * .2;
-  }
-
-  function paint(value, progress) {
-    scene = clamp(value, 0, 2);
-
-    root.style.setProperty('--scene', scene.toFixed(4));
-    root.style.setProperty('--cue-away', clamp(progress * 8, 0, 1));
-    root.style.setProperty('--drift', (-scene * 3).toFixed(2) + 'px');
-
-    cards.forEach((card, i) => {
-      const d = i - scene;
-
-      let opacity = 1;
-      let transform;
-
-      if (d >= 0) {
-        transform = `translate3d(0,${d * 11}px,${-d * 38}px)`;
-      } else {
-        const away = Math.min(1, -d);
-
-        transform = `translate3d(0,${-away * 45}px,${-away * 130}px) rotateX(${away * 90}deg)`;
-        opacity = 1;
-      }
-
-      card.style.transform = transform;
-      card.style.opacity = opacity.toFixed(3);
-      card.style.zIndex = String(10 - i);
-      card.style.visibility = d <= -1 ? 'hidden' : 'visible';
-    });
-
-    setActive(drag ? drag.index : Math.round(scene));
-
-    lens.style.setProperty('--lens-z', (-12 + scene * 55) + 'deg');
-  }
-
-  function render() {
-    frame = 0;
-
-    if (!enabled || drag) return;
-
-    const progress = clamp(
-      (window.scrollY - metrics.top) / metrics.range,
-      0,
-      1
+    portrait.style.setProperty(
+      "--glint",
+      (index * 45 - 45) + "%"
     );
 
-    paint(timeline(progress), progress);
-  }
-
-  function schedule() {
-    if (!frame) {
-      frame = requestAnimationFrame(render);
-    }
-  }
-
-  function measure() {
-    metrics.top = world.getBoundingClientRect().top + window.scrollY;
-    metrics.range = Math.max(1, world.offsetHeight - window.innerHeight);
-
-    schedule();
-  }
-
-  function configure() {
-    enabled = !reduce.matches && !shortScreen.matches;
-
-    root.classList.toggle('enhanced', enabled);
-    nav.hidden = false;
-    active = -1;
-
-    if (!enabled) {
-      drag = null;
-
-      root.classList.remove('dragging');
-      root.style.setProperty('--drift', '0px');
-      portrait.style.removeProperty('transform');
-
-      cards.forEach(card => {
-        ['transform', 'opacity', 'z-index', 'visibility'].forEach(prop => {
-          card.style.removeProperty(prop);
-        });
-      });
-
-      setActive(0);
-    }
+    portrait.style.setProperty(
+      "--photo-pan",
+      (index - 1) * 3 + "px"
+    );
 
     measure();
   }
 
-  function go(index) {
-    const next = clamp(index, 0, 2);
+  async function transition() {
+    changing = true;
+    deck.setAttribute("aria-busy", "true");
+    resetTilt();
 
-    if (enabled) {
+    while (requested !== active) {
+      const from = cards[active];
+      const direction = requested > active ? 1 : -1;
+
+      if (from.contains(document.activeElement)) {
+        buttons[requested].focus({ preventScroll: true });
+      }
+
+      await motion(
+        from,
+        [
+          {
+            transform: "perspective(1200px) rotateY(0deg) scale(1)",
+            filter: "brightness(1) blur(0px)",
+            opacity: 1
+          },
+          {
+            transform:
+              `perspective(1200px) rotateY(${-direction * 38}deg) scale(.95)`,
+            filter: "brightness(.88) blur(0px)",
+            opacity: 1,
+            offset: .6
+          },
+          {
+            transform:
+              `perspective(1200px) rotateY(${-direction * 90}deg) scale(.9)`,
+            filter: "brightness(.7) blur(1px)",
+            opacity: 0
+          }
+        ],
+        {
+          duration: 400,
+          easing: "cubic-bezier(.55,.06,.8,.4)",
+          fill: "forwards"
+        }
+      );
+
+      showOnly(requested);
+
+      const card = cards[active];
+
+      const entering = motion(
+        card,
+        [
+          {
+            transform:
+              `perspective(1200px) rotateY(${direction * 90}deg) scale(.9)`,
+            filter: "brightness(.7) blur(1px)",
+            opacity: 0
+          },
+          {
+            transform:
+              `perspective(1200px) rotateY(${direction * 22}deg) scale(.97)`,
+            filter: "brightness(.94) blur(0px)",
+            opacity: 1,
+            offset: .48
+          },
+          {
+            transform: "perspective(1200px) rotateY(0deg) scale(1)",
+            filter: "brightness(1) blur(0px)",
+            opacity: 1
+          }
+        ],
+        {
+          duration: 620,
+          easing: "cubic-bezier(.16,1,.3,1)"
+        }
+      );
+
+      [
+        card.querySelector("h2"),
+        card.querySelector("p"),
+        card.querySelector(".open-product"),
+        card.querySelector(".art")
+      ].forEach((part, i) => {
+        motion(
+          part,
+          [
+            {
+              transform: "translate3d(0,14px,0)",
+              opacity: 0
+            },
+            {
+              transform: "translate3d(0,0,0)",
+              opacity: 1
+            }
+          ],
+          {
+            duration: 430,
+            delay: 110 + i * 25,
+            easing: "cubic-bezier(.16,1,.3,1)",
+            fill: "backwards"
+          }
+        );
+      });
+
+      card.style.setProperty("--shine", "70%");
+
+      await entering;
+
+      card.style.setProperty("--shine", "-75%");
+    }
+
+    deck.removeAttribute("aria-busy");
+    changing = false;
+  }
+
+  function select(index, syncScroll = true) {
+    const next = clamp(index, 0, cards.length - 1);
+
+    requested = next;
+    markTab(next);
+
+    if (scrollMode && syncScroll) {
+      const destination = top + range * next / 2;
+      scrollAnchor = destination;
+
       window.scrollTo({
-        top: metrics.top + metrics.range * stops[next],
-        behavior: 'smooth'
+        top: destination,
+        behavior: "instant"
       });
-    } else {
-      cards[next].scrollIntoView({
-        behavior: 'instant',
-        block: 'center'
-      });
+    }
 
-      setActive(next);
+    if (!changing && requested !== active) {
+      transition();
+    }
+  }
+
+  function resetTilt() {
+    deck.style.setProperty("--tilt-x", "0deg");
+    deck.style.setProperty("--tilt-y", "0deg");
+    deck.style.setProperty("--drag-x", "0px");
+
+    cards[active].style.setProperty("--light-on", ".45");
+  }
+
+  function measure() {
+    const narrow = window.innerWidth <= 800;
+    const styles = getComputedStyle(stage);
+
+    const content = narrow
+      ? bio.offsetHeight +
+        panel.offsetHeight +
+        parseFloat(styles.rowGap)
+      : Math.max(bio.offsetHeight, panel.offsetHeight);
+
+    const required =
+      content +
+      parseFloat(styles.paddingTop) +
+      parseFloat(styles.paddingBottom);
+
+    const was = scrollMode;
+
+    scrollMode =
+      !reduce.matches &&
+      window.innerHeight > required + 12;
+
+    root.classList.toggle("scroll-story", scrollMode);
+
+    top = world.getBoundingClientRect().top + window.scrollY;
+    range = Math.max(1, world.offsetHeight - window.innerHeight);
+
+    if (was !== scrollMode) {
+      scrollAnchor = window.scrollY;
+    }
+
+    markTab(requested);
+  }
+
+  function renderScroll() {
+    frame = 0;
+
+    if (!scrollMode) return;
+
+    const progress = clamp(
+      (window.scrollY - top) / range,
+      0,
+      1
+    );
+
+    root.style.setProperty("--scroll", progress.toFixed(4));
+    root.style.setProperty("--drift", (-progress * 8) + "px");
+
+    root.style.setProperty(
+      "--ambient-y",
+      (35 + progress * 25) + "%"
+    );
+
+    deck.style.setProperty(
+      "--float-y",
+      (Math.sin(progress * Math.PI * 2) * 5) + "px"
+    );
+
+    lens.style.setProperty(
+      "--lens-z",
+      (progress * 90 - 12) + "deg"
+    );
+
+    if (
+      Math.abs(window.scrollY - scrollAnchor) > 3 &&
+      !drag
+    ) {
+      scrollAnchor = window.scrollY;
+      select(Math.round(progress * 2), false);
     }
   }
 
   buttons.forEach((button, i) => {
-    button.addEventListener('click', () => go(i));
+    button.addEventListener("click", () => select(i));
 
-    button.addEventListener('keydown', event => {
-      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
+    button.addEventListener("keydown", event => {
+      if (
+        !["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)
+      ) {
         return;
       }
 
       event.preventDefault();
 
-      const next = event.key === 'Home'
+      const next = event.key === "Home"
         ? 0
-        : event.key === 'End'
+        : event.key === "End"
           ? 2
-          : clamp(i + (event.key === 'ArrowRight' ? 1 : -1), 0, 2);
+          : (i + (event.key === "ArrowRight" ? 1 : 2)) % 3;
 
       buttons[next].focus({ preventScroll: true });
-      go(next);
+      select(next);
     });
   });
 
-  document.querySelectorAll('[data-grab]').forEach(art => {
-    art.addEventListener('pointerdown', event => {
-      if (
-        !enabled ||
-        event.button !== 0 ||
-        event.target.closest('a,button')
-      ) {
-        return;
-      }
+  deck.addEventListener("pointerdown", event => {
+    if (
+      changing ||
+      event.button !== 0 ||
+      event.target.closest("a,button")
+    ) {
+      return;
+    }
 
-      drag = {
-        id: event.pointerId,
-        x: event.clientX,
-        y: event.clientY,
-        start: scene,
-        index: active,
-        dx: 0,
-        moved: false
-      };
-
-      art.setPointerCapture(event.pointerId);
-      root.classList.add('dragging');
-    });
-
-    art.addEventListener('pointermove', event => {
-      const box = art.getBoundingClientRect();
-
-      const x = clamp((event.clientX - box.left) / box.width, 0, 1);
-      const y = clamp((event.clientY - box.top) / box.height, 0, 1);
-
-      if (!reduce.matches) {
-        if (art.classList.contains('diagnosis')) {
-          lens.style.setProperty(
-            '--lens-x',
-            (18 + (y - .5) * 35) + 'deg'
-          );
-
-          lens.style.setProperty(
-            '--lens-y',
-            (-22 + (x - .5) * 48) + 'deg'
-          );
-        }
-      }
-
-      if (!drag || drag.id !== event.pointerId) return;
-
-      drag.dx = event.clientX - drag.x;
-
-      if (
-        Math.abs(drag.dx) > 12 &&
-        Math.abs(drag.dx) > Math.abs(event.clientY - drag.y)
-      ) {
-        drag.moved = true;
-      }
-
-      if (drag.moved) {
-        const nextScene = clamp(
-          drag.start - drag.dx / (deck.clientWidth * .75),
-          0,
-          2
-        );
-
-        const progress = progressForScene(nextScene);
-
-        window.scrollTo({
-          top: metrics.top + metrics.range * progress,
-          behavior: 'instant'
-        });
-
-        paint(nextScene, progress);
-      }
-    });
-
-    const finish = event => {
-      if (!drag || drag.id !== event.pointerId) return;
-
-      const index = drag.index;
-
-      const next = drag.moved && Math.abs(drag.dx) > 45
-        ? index + (drag.dx < 0 ? 1 : -1)
-        : Math.round(drag.start);
-
-      drag = null;
-      root.classList.remove('dragging');
-
-      if (art.hasPointerCapture(event.pointerId)) {
-        art.releasePointerCapture(event.pointerId);
-      }
-
-      go(next);
-      schedule();
+    drag = {
+      id: event.pointerId,
+      x: event.clientX,
+      y: event.clientY,
+      dx: 0,
+      horizontal: false
     };
 
-    art.addEventListener('pointerup', finish);
-
-    art.addEventListener('pointercancel', event => {
-      if (!drag || drag.id !== event.pointerId) return;
-
-      drag = null;
-      root.classList.remove('dragging');
-      schedule();
-    });
-
-    art.addEventListener('pointerleave', () => {
-      if (drag) return;
-
-      lens.style.setProperty('--lens-x', '18deg');
-      lens.style.setProperty('--lens-y', '-22deg');
-
-      schedule();
-    });
+    deck.setPointerCapture(event.pointerId);
   });
 
-  window.addEventListener('scroll', schedule, { passive: true });
-  window.addEventListener('resize', measure, { passive: true });
-  window.addEventListener('load', measure, { once: true });
-  window.addEventListener('pageshow', measure);
+  deck.addEventListener("pointermove", event => {
+    const box = deck.getBoundingClientRect();
 
-  reduce.addEventListener('change', configure);
-  shortScreen.addEventListener('change', configure);
+    const x = clamp(
+      (event.clientX - box.left) / box.width,
+      0,
+      1
+    );
+
+    const y = clamp(
+      (event.clientY - box.top) / box.height,
+      0,
+      1
+    );
+
+    const card = cards[active];
+
+    if (!reduce.matches && !changing && fine.matches) {
+      card.style.setProperty("--light-x", x * 100 + "%");
+      card.style.setProperty("--light-y", y * 100 + "%");
+      card.style.setProperty("--light-on", "1");
+
+      deck.style.setProperty(
+        "--tilt-x",
+        (-(y - .5) * 5) + "deg"
+      );
+
+      deck.style.setProperty(
+        "--tilt-y",
+        ((x - .5) * 7) + "deg"
+      );
+
+      lens.style.setProperty(
+        "--lens-x",
+        (10 + (y - .5) * 35) + "deg"
+      );
+
+      lens.style.setProperty(
+        "--lens-y",
+        (-12 + (x - .5) * 48) + "deg"
+      );
+    }
+
+    if (!drag || drag.id !== event.pointerId) return;
+
+    drag.dx = event.clientX - drag.x;
+
+    if (
+      Math.abs(drag.dx) > 12 &&
+      Math.abs(drag.dx) > Math.abs(event.clientY - drag.y)
+    ) {
+      drag.horizontal = true;
+    }
+
+    if (drag.horizontal && !reduce.matches) {
+      deck.classList.add("dragging");
+
+      deck.style.setProperty(
+        "--drag-x",
+        clamp(drag.dx * .15, -24, 24) + "px"
+      );
+
+      deck.style.setProperty(
+        "--tilt-y",
+        clamp(drag.dx * .06, -9, 9) + "deg"
+      );
+    }
+  });
+
+  function release(event) {
+    if (!drag || drag.id !== event.pointerId) return;
+
+    const next =
+      drag.horizontal && Math.abs(drag.dx) > 42
+        ? active + (drag.dx < 0 ? 1 : -1)
+        : active;
+
+    drag = null;
+
+    if (deck.hasPointerCapture(event.pointerId)) {
+      deck.releasePointerCapture(event.pointerId);
+    }
+
+    deck.classList.remove("dragging");
+    resetTilt();
+
+    if (event.type !== "pointercancel") {
+      select(next);
+    }
+  }
+
+  deck.addEventListener("pointerup", release);
+  deck.addEventListener("pointercancel", release);
+
+  deck.addEventListener("pointerleave", () => {
+    if (!drag) resetTilt();
+  });
+
+  portrait.addEventListener("pointermove", event => {
+    if (reduce.matches || !fine.matches) return;
+
+    const box = portrait.getBoundingClientRect();
+    const x = (event.clientX - box.left) / box.width - .5;
+    const y = (event.clientY - box.top) / box.height - .5;
+
+    portrait.style.setProperty("--photo-y", x * 7 + "deg");
+    portrait.style.setProperty("--photo-x", -y * 5 + "deg");
+    portrait.style.setProperty("--glint", x * 80 + "%");
+  });
+
+  portrait.addEventListener("pointerleave", () => {
+    portrait.style.setProperty("--photo-y", "0deg");
+    portrait.style.setProperty("--photo-x", "0deg");
+
+    portrait.style.setProperty(
+      "--glint",
+      (active * 45 - 45) + "%"
+    );
+  });
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!frame) {
+        frame = requestAnimationFrame(renderScroll);
+      }
+    },
+    { passive: true }
+  );
+
+  window.addEventListener("resize", measure, { passive: true });
+  window.addEventListener("load", measure, { once: true });
+  window.addEventListener("pageshow", measure);
+
+  reduce.addEventListener("change", () => {
+    if (reduce.matches) {
+      running.forEach(animation => animation.cancel());
+    }
+
+    resetTilt();
+    measure();
+  });
+
+  nav.hidden = false;
+
+  showOnly(0);
+  markTab(0);
 
   if (document.fonts) {
     document.fonts.ready.then(measure);
   }
 
-  configure();
+  if ("ResizeObserver" in window) {
+    new ResizeObserver(measure).observe(panel);
+  }
 })();
 </script>
 </body>
