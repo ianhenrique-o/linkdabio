@@ -1,0 +1,1187 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#e7e7de">
+
+<title>Ian Henrique | Diagnóstico, Plano 30 Dias e Rota 90</title>
+
+<meta name="description" content="Estratégia, posicionamento e vendas. Conheça o Diagnóstico, o Plano 30 Dias e a Rota 90 de Ian Henrique.">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231b2b23'/%3E%3Cpath d='M20 17v30m11-30v30m15-30v30M31 32h15' stroke='%23e8e8dc' stroke-width='5'/%3E%3C/svg%3E">
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/manrope@5.3.0/files/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+<style>
+@font-face{
+  font-family:Manrope;
+  src:url('https://cdn.jsdelivr.net/npm/@fontsource-variable/manrope@5.3.0/files/manrope-latin-wght-normal.woff2') format('woff2');
+  font-weight:200 800;
+  font-display:swap;
+}
+
+@font-face{
+  font-family:Instrument;
+  src:url('https://cdn.jsdelivr.net/npm/@fontsource/instrument-serif@5.3.0/files/instrument-serif-latin-400-italic.woff2') format('woff2');
+  font-style:italic;
+  font-display:swap;
+}
+
+:root{
+  --paper:#e7e7de;
+  --ink:#1b2b23;
+  --copper:#dbad86;
+  --scene:0;
+  --drift:0px;
+}
+
+*{box-sizing:border-box}
+
+html{
+  background:var(--paper);
+  color:var(--ink);
+  scrollbar-color:#687464 var(--paper);
+}
+
+body{
+  margin:0;
+  font-family:Manrope,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+button,a{
+  -webkit-tap-highlight-color:transparent;
+  -webkit-user-drag:none;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button{font:inherit}
+
+button:focus-visible,
+a:focus-visible{
+  outline:2px solid currentColor;
+  outline-offset:5px;
+}
+
+h1,h2,p{margin:0}
+
+::selection{
+  background:var(--ink);
+  color:var(--paper);
+}
+
+[hidden]{display:none!important}
+
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  margin:-1px;
+  padding:0;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
+
+.world{position:relative}
+
+.pin{
+  position:relative;
+  overflow:hidden;
+  background:var(--paper);
+}
+
+.stage{
+  position:relative;
+  max-width:1100px;
+  min-height:100svh;
+  margin:auto;
+  padding:70px 56px;
+  display:grid;
+  grid-template-columns:minmax(0,280px) minmax(0,460px);
+  justify-content:space-between;
+  gap:100px;
+  align-items:center;
+}
+
+.bio{
+  position:relative;
+  min-width:0;
+  width:100%;
+  align-self:center;
+}
+
+.portrait-shell{
+  position:relative;
+  width:100%;
+  max-width:280px;
+  isolation:isolate;
+}
+
+.portrait{
+  position:relative;
+  aspect-ratio:7/8;
+  overflow:hidden;
+  background:#273c2d;
+  border-radius:3px 3px 20px 3px;
+}
+
+.portrait:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,transparent 55%,#13221840);
+  pointer-events:none;
+}
+
+.portrait img{
+  position:absolute;
+  inset:-4% 0;
+  width:100%;
+  height:108%;
+  object-fit:cover;
+  object-position:center 30%;
+  filter:saturate(.7);
+  transform:translateY(var(--drift)) scale(1.025);
+}
+
+.portrait-fallback{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  font:italic 135px/.8 Instrument,Georgia,serif;
+  letter-spacing:-.12em;
+  color:#a4b89742;
+  translate:-7px var(--drift);
+}
+
+.portrait-glint{
+  position:absolute;
+  inset:-20%;
+  pointer-events:none;
+  z-index:2;
+  opacity:.2;
+  background:linear-gradient(115deg,transparent 35%,#eef1d722 49%,transparent 62%);
+  transform:translateX(calc(var(--scene)*25% - 25%));
+}
+
+.signature{
+  position:relative;
+  margin-top:23px;
+  min-width:0;
+}
+
+.signature h1{
+  display:flex;
+  gap:9px;
+  align-items:baseline;
+  flex-wrap:wrap;
+  font-size:2.75rem;
+  font-weight:450;
+  line-height:1.05;
+  letter-spacing:-.065em;
+  color:var(--ink);
+}
+
+.signature h1 em{
+  font:italic 1.09em/1 Instrument,Georgia,serif;
+  letter-spacing:-.035em;
+}
+
+.signature p{
+  font-size:.875rem;
+  line-height:1.5;
+  margin-top:11px;
+  max-width:250px;
+  color:#52604f;
+}
+
+.product-panel{
+  min-width:0;
+  width:100%;
+  position:relative;
+  isolation:isolate;
+}
+
+.deck{
+  position:relative;
+  display:grid;
+  gap:20px;
+  min-width:0;
+  perspective:1800px;
+  perspective-origin:50% 50%;
+}
+
+.card{
+  --card-ink:#e8eddf;
+  --card-muted:#c3cfbd;
+  --card-accent:#c8d4a0;
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 58px;
+  grid-template-rows:auto 1fr auto;
+  gap:14px 22px;
+  min-height:260px;
+  isolation:isolate;
+  padding:30px;
+  color:var(--card-ink);
+  background:#22392c;
+  border:1px solid #b7c2a63b;
+  border-radius:4px 4px 16px 4px;
+  box-shadow:0 14px 30px #2436270d;
+  backface-visibility:hidden;
+  transform-origin:50% 100%;
+  touch-action:pan-y;
+}
+
+.card:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  border-radius:inherit;
+  pointer-events:none;
+  background:linear-gradient(120deg,#ffffff03,transparent 40%,#0a181010);
+}
+
+.card-body{display:contents}
+
+.card h2{
+  grid-column:1;
+  grid-row:1;
+  align-self:center;
+  font-size:1.75rem;
+  font-weight:500;
+  letter-spacing:-.055em;
+  line-height:1.15;
+}
+
+.card p{
+  grid-column:1/-1;
+  grid-row:2;
+  align-self:start;
+  font-size:1rem;
+  line-height:1.5;
+  letter-spacing:-.015em;
+  color:var(--card-muted);
+  margin:0;
+  max-width:34ch;
+}
+
+.art{
+  position:relative;
+  grid-column:2;
+  grid-row:1;
+  align-self:start;
+  width:58px;
+  height:58px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  isolation:isolate;
+  user-select:none;
+  color:var(--card-accent);
+}
+
+.enhanced .card{cursor:grab}
+.dragging .card{cursor:grabbing}
+
+.open-product{
+  grid-column:1/-1;
+  grid-row:3;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding-top:17px;
+  border-top:1px solid #b7c2a63b;
+  font-size:.875rem;
+  font-weight:550;
+  line-height:1.4;
+  min-height:44px;
+  cursor:pointer;
+}
+
+.open-product:after{
+  content:"";
+  display:block;
+  width:21px;
+  height:21px;
+  flex:none;
+  border-radius:50%;
+  border:1px solid currentColor;
+  background:radial-gradient(circle,currentColor 0 2px,transparent 3px);
+  transition:transform .3s;
+  opacity:.7;
+}
+
+.open-product:hover:after,
+.open-product:focus-visible:after{
+  transform:scale(1.15);
+  opacity:1;
+}
+
+.open-product span{transition:translate .3s}
+.open-product:hover span{translate:3px 0}
+
+.plan{
+  --card-ink:#283b28;
+  --card-muted:#53604b;
+  --card-accent:#415936;
+  background:#efeee5;
+  border-color:#c6ceba;
+}
+
+.plan .open-product{border-color:#c6ceba}
+
+.rota{
+  --card-ink:#f0eade;
+  --card-muted:#c6c6b5;
+  --card-accent:#dbad86;
+  background:#17211e;
+  border-color:#536557;
+}
+
+.lens{
+  position:relative;
+  margin-top:4px;
+  width:40px;
+  height:40px;
+  transform-style:preserve-3d;
+  transform:
+    perspective(700px)
+    rotateX(var(--lens-x,10deg))
+    rotateY(var(--lens-y,-12deg))
+    rotateZ(var(--lens-z,-12deg));
+  transition:transform .25s ease-out;
+}
+
+.lens-ring{
+  position:absolute;
+  inset:0;
+  border:1px solid currentColor;
+  border-radius:50%;
+}
+
+.lens-ring:nth-child(1){
+  opacity:.2;
+  transform:translateZ(-3px);
+}
+
+.lens-ring:nth-child(2){
+  inset:4px;
+  opacity:.35;
+}
+
+.lens-ring:nth-child(3){
+  inset:9px;
+  transform:translateZ(4px);
+  opacity:.75;
+}
+
+.lens-ring:nth-child(4){
+  inset:14px;
+  transform:translateZ(8px);
+}
+
+.lens-center{
+  position:absolute;
+  inset:18px;
+  border-radius:50%;
+  background:currentColor;
+  transform:translateZ(12px);
+}
+
+.lens-cross{
+  position:absolute;
+  inset:0;
+  transform:translateZ(4px);
+  opacity:.35;
+}
+
+.lens-cross:before,
+.lens-cross:after{
+  content:"";
+  position:absolute;
+  background:currentColor;
+}
+
+.lens-cross:before{
+  height:1px;
+  width:calc(100% + 10px);
+  left:-5px;
+  top:50%;
+}
+
+.lens-cross:after{
+  width:1px;
+  height:calc(100% + 10px);
+  top:-5px;
+  left:50%;
+}
+
+.numeral{
+  font-size:3rem;
+  font-weight:400;
+  line-height:1;
+  letter-spacing:-.085em;
+  font-variant-numeric:tabular-nums;
+}
+
+.numeral small{
+  display:block;
+  font-size:.75rem;
+  letter-spacing:.02em;
+  line-height:1.3;
+  text-align:right;
+  margin-top:5px;
+  font-weight:500;
+}
+
+.product-nav{
+  display:flex;
+  gap:5px;
+  align-items:center;
+  margin-top:30px;
+  position:relative;
+  z-index:20;
+}
+
+.product-nav button{
+  flex:1;
+  min-height:44px;
+  border:0;
+  border-radius:3px;
+  padding:10px 5px;
+  background:transparent;
+  color:#596354;
+  cursor:pointer;
+  font-size:.8125rem;
+  font-weight:550;
+  white-space:nowrap;
+  transition:background .3s,color .3s;
+}
+
+.product-nav button[aria-current="true"]{
+  background:#1b2b23;
+  color:#e7e7de;
+}
+
+.product-nav button:not([aria-current="true"]):hover{
+  background:#1b2b2310;
+  color:#1b2b23;
+}
+
+.scroll-cue{
+  position:absolute;
+  left:56px;
+  bottom:26px;
+  width:19px;
+  height:29px;
+  border:1px solid #46593d55;
+  border-radius:15px;
+  display:none;
+  opacity:calc(1 - var(--cue-away,0));
+  pointer-events:none;
+}
+
+.scroll-cue:after{
+  content:"";
+  position:absolute;
+  top:6px;
+  left:8px;
+  width:1px;
+  height:6px;
+  background:#283b28;
+  animation:scroll-cue 2.2s ease-in-out infinite;
+}
+
+@keyframes scroll-cue{
+  0%,100%{
+    transform:translateY(0);
+    opacity:.4;
+  }
+  50%{
+    transform:translateY(7px);
+    opacity:1;
+  }
+}
+
+.enhanced .world{height:260svh}
+
+.enhanced .pin{
+  position:sticky;
+  top:0;
+  height:100svh;
+}
+
+.enhanced .stage{
+  height:100svh;
+  min-height:0;
+}
+
+.enhanced .deck{
+  height:290px;
+  display:block;
+}
+
+.enhanced .card{
+  position:absolute;
+  inset:0;
+  min-height:0;
+  will-change:transform;
+  transform-style:preserve-3d;
+}
+
+.enhanced .scroll-cue{display:block}
+
+@media(min-width:801px) and (max-width:1000px){
+  .stage{
+    padding:60px 40px;
+    gap:65px;
+    grid-template-columns:minmax(0,.68fr) minmax(0,1fr);
+  }
+
+  .signature h1{font-size:2.4rem}
+
+  .card{
+    padding:25px;
+    column-gap:16px;
+  }
+
+  .card h2{font-size:1.6rem}
+  .card p{font-size:.9375rem}
+  .enhanced .deck{height:290px}
+}
+
+@media(max-width:800px){
+  .stage{
+    max-width:560px;
+    grid-template-columns:1fr;
+    padding:36px 26px;
+    gap:42px;
+    align-content:center;
+  }
+
+  .bio{
+    display:grid;
+    grid-template-columns:100px minmax(0,1fr);
+    gap:21px;
+    align-items:center;
+  }
+
+  .portrait-shell{
+    max-width:100%;
+    margin:0;
+  }
+
+  .portrait{
+    aspect-ratio:5/6;
+    border-radius:3px 3px 12px 3px;
+  }
+
+  .portrait-fallback{
+    font-size:70px;
+    translate:-3px var(--drift);
+  }
+
+  .signature{margin:0}
+
+  .signature h1{
+    display:block;
+    font-size:2.1rem;
+    line-height:1.06;
+    letter-spacing:-.065em;
+  }
+
+  .signature h1 em{
+    display:block;
+    margin-top:3px;
+    font-size:1.15em;
+  }
+
+  .signature p{
+    font-size:.8125rem;
+    line-height:1.45;
+    margin-top:10px;
+    max-width:215px;
+  }
+
+  .card{
+    padding:26px;
+    grid-template-columns:minmax(0,1fr) 48px;
+    column-gap:19px;
+    min-height:250px;
+  }
+
+  .art{
+    width:48px;
+    height:54px;
+  }
+
+  .numeral{font-size:2.65rem}
+  .card h2{font-size:1.6rem}
+
+  .card p{
+    font-size:.9375rem;
+    line-height:1.48;
+  }
+
+  .product-nav{
+    margin-top:25px;
+    gap:2px;
+  }
+
+  .product-nav button{
+    font-size:.75rem;
+    padding:10px 4px;
+  }
+
+  .enhanced .stage{
+    display:grid;
+    grid-template-rows:auto auto;
+    row-gap:42px;
+    align-content:center;
+    padding-block:32px;
+  }
+
+  .enhanced .deck{height:280px}
+  .enhanced .scroll-cue{display:none}
+}
+
+@media(max-width:360px){
+  .stage{padding-inline:20px}
+
+  .bio{
+    grid-template-columns:82px minmax(0,1fr);
+    gap:17px;
+  }
+
+  .signature h1{font-size:1.85rem}
+  .signature p{font-size:.75rem}
+
+  .card{
+    padding:22px;
+    column-gap:13px;
+    grid-template-columns:minmax(0,1fr) 42px;
+  }
+
+  .card h2{font-size:1.45rem}
+  .card p{font-size:.875rem}
+  .art{width:42px}
+  .numeral{font-size:2.45rem}
+
+  .lens{
+    width:36px;
+    height:36px;
+  }
+
+  .lens-center{inset:16px}
+  .lens-ring:nth-child(4){inset:12px}
+  .enhanced .deck{height:275px}
+  .open-product{font-size:.8125rem}
+  .product-nav button{font-size:.7rem}
+  .enhanced .stage{row-gap:34px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{
+    animation:none!important;
+    transition:none!important;
+  }
+
+  .portrait img,
+  .lens{transform:none!important}
+
+  .portrait-fallback{translate:none!important}
+  .portrait-glint{display:none}
+}
+</style>
+</head>
+
+<body>
+<main class="world">
+  <div class="pin">
+    <div class="stage">
+
+      <header class="bio">
+        <div class="portrait-shell">
+          <div class="portrait">
+            <span class="portrait-fallback" aria-hidden="true">ih</span>
+
+            <img
+              src="fotoSobre.jpg"
+              alt="Ian Henrique"
+              width="700"
+              height="950"
+              fetchpriority="high"
+              decoding="async"
+              onerror="this.hidden=true"
+            >
+
+            <span class="portrait-glint" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="signature">
+          <h1><span>Ian</span><em>Henrique</em></h1>
+          <p>Estratégia, posicionamento e vendas.</p>
+        </div>
+      </header>
+
+      <section class="product-panel" aria-label="Conheça meus produtos">
+        <div class="deck" aria-label="Produtos de Ian Henrique">
+
+          <article
+            data-grab
+            class="card diagnosis"
+            id="diagnostico"
+            aria-labelledby="diagnosis-title"
+          >
+            <div class="art diagnosis-art" aria-label="Lente do Diagnóstico">
+              <div class="lens" aria-hidden="true">
+                <i class="lens-ring"></i>
+                <i class="lens-ring"></i>
+                <i class="lens-ring"></i>
+                <i class="lens-ring"></i>
+                <i class="lens-cross"></i>
+                <i class="lens-center"></i>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h2 id="diagnosis-title">Diagnóstico</h2>
+              <p>Entenda onde seu negócio perde oportunidades e o que precisa mudar para avançar.</p>
+            </div>
+
+            <a
+              class="open-product"
+              href="https://oianhenrique.com.br/?utm_source=ig&amp;utm_medium=social&amp;utm_content=link_in_bio&amp;fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaeJPEGkgnA6MrWFFKfZXYhaLmacNxKgivNguy6HWB8sIt-OCEy7Ot6J1BciPQ_aem_cvj5NQgctSOxQ4sqEQ1Czw"
+            >
+              <span>Agendar meu diagnóstico</span>
+            </a>
+          </article>
+
+          <article
+            data-grab
+            class="card plan"
+            id="plano"
+            aria-labelledby="plan-title"
+          >
+            <div class="art plan-art" aria-label="Trinta dias do plano">
+              <span class="numeral" aria-hidden="true">
+                30<small>dias</small>
+              </span>
+            </div>
+
+            <div class="card-body">
+              <h2 id="plan-title">Plano <span class="sr-only">30 Dias</span></h2>
+              <p>Organize seu perfil, conteúdo e Direct para atrair as pessoas certas e gerar conversas de venda.</p>
+            </div>
+
+            <a
+              class="open-product"
+              href="https://ianhenrique-o.github.io/newp30d/"
+            >
+              <span>Conhecer o Plano 30 Dias</span>
+            </a>
+          </article>
+
+          <article
+            data-grab
+            class="card rota"
+            id="rota"
+            aria-labelledby="rota-title"
+          >
+            <div class="art route-art" aria-label="Trajetória da Rota 90">
+              <span class="numeral" aria-hidden="true">90</span>
+            </div>
+
+            <div class="card-body">
+              <h2 id="rota-title">Rota <span class="sr-only">90</span></h2>
+              <p>Estruture a geração de oportunidades e o processo comercial da sua empresa em 90 dias.</p>
+            </div>
+
+            <a
+              class="open-product"
+              href="https://ianhenrique-o.github.io/Rota90/"
+            >
+              <span>Conhecer a Rota 90</span>
+            </a>
+          </article>
+
+        </div>
+
+        <nav class="product-nav" aria-label="Explorar produtos" hidden>
+          <button
+            type="button"
+            aria-controls="diagnostico"
+            aria-current="true"
+          >
+            Diagnóstico
+          </button>
+
+          <button type="button" aria-controls="plano">
+            Plano 30 Dias
+          </button>
+
+          <button type="button" aria-controls="rota">
+            Rota 90
+          </button>
+        </nav>
+      </section>
+
+      <span class="scroll-cue" aria-hidden="true"></span>
+
+    </div>
+  </div>
+</main>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  const world = document.querySelector('.world');
+  const deck = document.querySelector('.deck');
+  const cards = [...document.querySelectorAll('.card')];
+  const nav = document.querySelector('.product-nav');
+  const buttons = [...nav.querySelectorAll('button')];
+  const portrait = document.querySelector('.portrait-shell');
+  const lens = document.querySelector('.lens');
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const shortScreen = matchMedia('(max-height: 580px)');
+
+  const clamp = (n, lo, hi) => Math.min(hi, Math.max(lo, n));
+  const ease = t => t * t * (3 - 2 * t);
+  const stops = [0, .48, 1];
+
+  let enabled = false;
+  let frame = 0;
+  let scene = 0;
+  let active = -1;
+  let drag = null;
+  let metrics = { top: 0, range: 1 };
+
+  function setActive(index) {
+    if (active === index) return;
+
+    active = index;
+
+    cards.forEach((card, i) => {
+      const offstage = enabled && i !== active;
+
+      card.inert = offstage;
+
+      if (offstage) {
+        card.setAttribute('aria-hidden', 'true');
+      } else {
+        card.removeAttribute('aria-hidden');
+      }
+
+      card.classList.toggle('is-current', i === active);
+    });
+
+    buttons.forEach((button, i) => {
+      if (i === active) {
+        button.setAttribute('aria-current', 'true');
+      } else {
+        button.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  function timeline(progress) {
+    if (progress < .16) return 0;
+    if (progress < .36) return ease((progress - .16) / .2);
+    if (progress < .62) return 1;
+    if (progress < .82) return 1 + ease((progress - .62) / .2);
+
+    return 2;
+  }
+
+  function progressForScene(value) {
+    const s = clamp(value, 0, 2);
+
+    if (s === 0) return .16;
+    if (s === 2) return .82;
+
+    const fraction = s <= 1 ? s : s - 1;
+
+    let lo = 0;
+    let hi = 1;
+
+    for (let i = 0; i < 16; i++) {
+      const mid = (lo + hi) / 2;
+
+      if (ease(mid) < fraction) {
+        lo = mid;
+      } else {
+        hi = mid;
+      }
+    }
+
+    return (s <= 1 ? .16 : .62) + (lo + hi) / 2 * .2;
+  }
+
+  function paint(value, progress) {
+    scene = clamp(value, 0, 2);
+
+    root.style.setProperty('--scene', scene.toFixed(4));
+    root.style.setProperty('--cue-away', clamp(progress * 8, 0, 1));
+    root.style.setProperty('--drift', (-scene * 3).toFixed(2) + 'px');
+
+    cards.forEach((card, i) => {
+      const d = i - scene;
+
+      let opacity = 1;
+      let transform;
+
+      if (d >= 0) {
+        transform = `translate3d(0,${d * 11}px,${-d * 38}px)`;
+      } else {
+        const away = Math.min(1, -d);
+
+        transform = `translate3d(0,${-away * 45}px,${-away * 130}px) rotateX(${away * 90}deg)`;
+        opacity = 1;
+      }
+
+      card.style.transform = transform;
+      card.style.opacity = opacity.toFixed(3);
+      card.style.zIndex = String(10 - i);
+      card.style.visibility = d <= -1 ? 'hidden' : 'visible';
+    });
+
+    setActive(drag ? drag.index : Math.round(scene));
+
+    lens.style.setProperty('--lens-z', (-12 + scene * 55) + 'deg');
+  }
+
+  function render() {
+    frame = 0;
+
+    if (!enabled || drag) return;
+
+    const progress = clamp(
+      (window.scrollY - metrics.top) / metrics.range,
+      0,
+      1
+    );
+
+    paint(timeline(progress), progress);
+  }
+
+  function schedule() {
+    if (!frame) {
+      frame = requestAnimationFrame(render);
+    }
+  }
+
+  function measure() {
+    metrics.top = world.getBoundingClientRect().top + window.scrollY;
+    metrics.range = Math.max(1, world.offsetHeight - window.innerHeight);
+
+    schedule();
+  }
+
+  function configure() {
+    enabled = !reduce.matches && !shortScreen.matches;
+
+    root.classList.toggle('enhanced', enabled);
+    nav.hidden = false;
+    active = -1;
+
+    if (!enabled) {
+      drag = null;
+
+      root.classList.remove('dragging');
+      root.style.setProperty('--drift', '0px');
+      portrait.style.removeProperty('transform');
+
+      cards.forEach(card => {
+        ['transform', 'opacity', 'z-index', 'visibility'].forEach(prop => {
+          card.style.removeProperty(prop);
+        });
+      });
+
+      setActive(0);
+    }
+
+    measure();
+  }
+
+  function go(index) {
+    const next = clamp(index, 0, 2);
+
+    if (enabled) {
+      window.scrollTo({
+        top: metrics.top + metrics.range * stops[next],
+        behavior: 'smooth'
+      });
+    } else {
+      cards[next].scrollIntoView({
+        behavior: 'instant',
+        block: 'center'
+      });
+
+      setActive(next);
+    }
+  }
+
+  buttons.forEach((button, i) => {
+    button.addEventListener('click', () => go(i));
+
+    button.addEventListener('keydown', event => {
+      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
+        return;
+      }
+
+      event.preventDefault();
+
+      const next = event.key === 'Home'
+        ? 0
+        : event.key === 'End'
+          ? 2
+          : clamp(i + (event.key === 'ArrowRight' ? 1 : -1), 0, 2);
+
+      buttons[next].focus({ preventScroll: true });
+      go(next);
+    });
+  });
+
+  document.querySelectorAll('[data-grab]').forEach(art => {
+    art.addEventListener('pointerdown', event => {
+      if (
+        !enabled ||
+        event.button !== 0 ||
+        event.target.closest('a,button')
+      ) {
+        return;
+      }
+
+      drag = {
+        id: event.pointerId,
+        x: event.clientX,
+        y: event.clientY,
+        start: scene,
+        index: active,
+        dx: 0,
+        moved: false
+      };
+
+      art.setPointerCapture(event.pointerId);
+      root.classList.add('dragging');
+    });
+
+    art.addEventListener('pointermove', event => {
+      const box = art.getBoundingClientRect();
+
+      const x = clamp((event.clientX - box.left) / box.width, 0, 1);
+      const y = clamp((event.clientY - box.top) / box.height, 0, 1);
+
+      if (!reduce.matches) {
+        if (art.classList.contains('diagnosis')) {
+          lens.style.setProperty(
+            '--lens-x',
+            (18 + (y - .5) * 35) + 'deg'
+          );
+
+          lens.style.setProperty(
+            '--lens-y',
+            (-22 + (x - .5) * 48) + 'deg'
+          );
+        }
+      }
+
+      if (!drag || drag.id !== event.pointerId) return;
+
+      drag.dx = event.clientX - drag.x;
+
+      if (
+        Math.abs(drag.dx) > 12 &&
+        Math.abs(drag.dx) > Math.abs(event.clientY - drag.y)
+      ) {
+        drag.moved = true;
+      }
+
+      if (drag.moved) {
+        const nextScene = clamp(
+          drag.start - drag.dx / (deck.clientWidth * .75),
+          0,
+          2
+        );
+
+        const progress = progressForScene(nextScene);
+
+        window.scrollTo({
+          top: metrics.top + metrics.range * progress,
+          behavior: 'instant'
+        });
+
+        paint(nextScene, progress);
+      }
+    });
+
+    const finish = event => {
+      if (!drag || drag.id !== event.pointerId) return;
+
+      const index = drag.index;
+
+      const next = drag.moved && Math.abs(drag.dx) > 45
+        ? index + (drag.dx < 0 ? 1 : -1)
+        : Math.round(drag.start);
+
+      drag = null;
+      root.classList.remove('dragging');
+
+      if (art.hasPointerCapture(event.pointerId)) {
+        art.releasePointerCapture(event.pointerId);
+      }
+
+      go(next);
+      schedule();
+    };
+
+    art.addEventListener('pointerup', finish);
+
+    art.addEventListener('pointercancel', event => {
+      if (!drag || drag.id !== event.pointerId) return;
+
+      drag = null;
+      root.classList.remove('dragging');
+      schedule();
+    });
+
+    art.addEventListener('pointerleave', () => {
+      if (drag) return;
+
+      lens.style.setProperty('--lens-x', '18deg');
+      lens.style.setProperty('--lens-y', '-22deg');
+
+      schedule();
+    });
+  });
+
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', measure, { passive: true });
+  window.addEventListener('load', measure, { once: true });
+  window.addEventListener('pageshow', measure);
+
+  reduce.addEventListener('change', configure);
+  shortScreen.addEventListener('change', configure);
+
+  if (document.fonts) {
+    document.fonts.ready.then(measure);
+  }
+
+  configure();
+})();
+</script>
+</body>
+</html>
